@@ -44,7 +44,7 @@ export const Footer = () => {
                 </svg>
               </Link>
               <Link
-                href="https://github.com/NxtGen-Dev-ZAH"
+                href="https://github.com/zaheer-ahmed-git"
                 target="_blank"
                 className="text-[#D8BFD8] hover:text-[#00FFFF] transition-colors"
               >
@@ -199,13 +199,13 @@ export const Footer = () => {
               </h4>
               <ul className="space-y-2">
                 <li className="text-[#D8BFD8]">dev.zaheer.ahmad@gmail.com</li>
-                <li className="text-[#D8BFD8]">Islamabad, Pakistan</li>
+                <li className="text-[#D8BFD8]">Calais, France</li>
               </ul>
             </div>
           </div>
         </div>
         <div className="mt-12 border-t border-[#444444] pt-6 text-center text-sm text-[#D8BFD8]/70">
-          <p>© 2024 Zaheer Ahmed. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Zaheer Ahmed. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -1,10 +1,5 @@
-import {
-  Cloud,
-  Brain,
-  Code,
-} from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import SkillBar from "@/components/ui/SkillBar";
+import { Brain } from "lucide-react";
+import { skillGroups } from "@/lib/portfolio-data";
 
 export const SkillsSection = () => {
   return (
@@ -21,99 +16,34 @@ export const SkillsSection = () => {
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-[#F5F5F5]">Technical Skills</h2>
             <div className="h-1 w-20 bg-gradient-to-r from-[#00FFFF] to-[#30193D] rounded-full mx-auto"></div>
             <p className="max-w-[900px] text-[#D8BFD8] md:text-xl">
-              With over two years of experience in AI development, I bring a comprehensive
-              skill set in both technical and cloud infrastructure domains.
+              Tools I use in AI research, backend engineering and cloud delivery
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
-          <div className="flex flex-col items-center space-y-2  hover:shadow-[0_0_20px_rgba(0,255,255,0.5)] p-4 rounded-lg border border-[#444444] bg-black/70 backdrop-blur-sm transition-all hover:bg-[#30193D]/20 hover:border-[#00FFFF]/50">
-            <div className="p-2 rounded-full bg-[#222222] ">
-              <Brain className="h-6 w-6 text-[#00FFFF]" />
-            </div>
-            <h3 className="text-xl font-bold text-[#F5F5F5]">Generative AI</h3>
-            <p className="text-[#D8BFD8] text-center">
-              Expert in LLMs, LangChain, LangGraph, CrewAI, Autogen, CLIP, and RAG systems for intelligent applications.
-            </p>
-          </div>
-          <div className="flex flex-col items-center space-y-2 p-4  hover:shadow-[0_0_20px_rgba(0,255,255,0.5)] rounded-lg border border-[#444444] bg-black/70 backdrop-blur-sm transition-all hover:bg-[#30193D]/20 hover:border-[#00FFFF]/50">
-            <div className="p-2 rounded-full bg-[#222222]">
-              <Cloud className="h-6 w-6 text-[#00FFFF]" />
-            </div>
-            <h3 className="text-xl font-bold text-[#F5F5F5]">Cloud Solutions</h3>
-            <p className="text-[#D8BFD8] text-center">
-              Specialized in Azure Cloud, Docker, CI/CD pipelines, and Dapr for scalable AI infrastructure.
-            </p>
-          </div>
-          <div className="flex flex-col items-center space-y-2 p-4  hover:shadow-[0_0_20px_rgba(0,255,255,0.5)] rounded-lg border border-[#444444] bg-black/70 backdrop-blur-sm transition-all hover:bg-[#30193D]/20 hover:border-[#00FFFF]/50">
-            <div className="p-2 rounded-full bg-[#222222]">
-              <Code
-                className="h-6 w-6 text-[#00FFFF]"
-              />
-            </div>
-            <h3 className="text-xl font-bold text-[#F5F5F5]">Backend Engineering</h3>
-            <p className="text-[#D8BFD8] text-center">
-              Proficient in FastAPI, Flask, Node.js, Kafka, and Kong API Gateway for robust backend services.
-            </p>
-          </div>
-        </div>
-
-        <div className="max-w-3xl mx-auto">
-          <Tabs defaultValue="core" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-black border border-[#444444]">
-              <TabsTrigger
-                value="core"
-                className="data-[state=active]:bg-[#222222] data-[state=active]:text-[#00FFFF]"
-              >
-                Core Skills
-              </TabsTrigger>
-              <TabsTrigger
-                value="tech"
-                className="data-[state=active]:bg-[#222222] data-[state=active]:text-[#00FFFF]"
-              >
-                Technical
-              </TabsTrigger>
-              <TabsTrigger
-                value="soft"
-                className="data-[state=active]:bg-[#222222] data-[state=active]:text-[#00FFFF]"
-              >
-                Soft Skills
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="core" className="space-y-4 mt-4">
-              <div className="space-y-4">
-                <SkillBar skill="LLMs & Agentic AI" percentage={95} color="cyan" />
-                <SkillBar skill="RAG Systems" percentage={92} color="cyan" />
-                <SkillBar skill="Azure Cloud" percentage={90} color="cyan" />
-                <SkillBar skill="Docker & CI/CD Pipelines" percentage={88} color="cyan" />
-                <SkillBar skill="FastAPI & Flask" percentage={85} color="cyan" />
-                <SkillBar skill="Node.js & TypeScript" percentage={82} color="cyan" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {skillGroups.map((group) => (
+            <div
+              key={group.title}
+              className="p-5 rounded-lg border border-[#444444] bg-black/70 backdrop-blur-sm hover:border-[#00FFFF]/50 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)] transition-all"
+            >
+              <h3 className="text-lg font-bold text-[#F5F5F5] mb-4">{group.title}</h3>
+              <div className="flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <span
+                    key={item}
+                    className="bg-[#30193D]/30 text-[#00FFFF] border border-[#444444] px-3 py-1 rounded-full text-sm"
+                  >
+                    {item}
+                  </span>
+                ))}
               </div>
-            </TabsContent>
-            <TabsContent value="tech" className="space-y-4 mt-4">
-              <div className="space-y-4">
-                <SkillBar skill="LangChain & LangGraph" percentage={90} color="purple" />
-                <SkillBar skill="CrewAI & Autogen" percentage={88} color="purple" />
-                <SkillBar skill="PostgreSQL & VectorDBs" percentage={85} color="purple" />
-                <SkillBar skill="Python" percentage={92} color="purple" />
-                <SkillBar skill="Kafka & Message Queues" percentage={80} color="purple" />
-              </div>
-            </TabsContent>
-            <TabsContent value="soft" className="space-y-4 mt-4">
-              <div className="space-y-4">
-                <SkillBar skill="Communication" percentage={95} color="gradient" />
-                <SkillBar skill="Problem-Solving" percentage={93} color="gradient" />
-                <SkillBar skill="Emotional Intelligence" percentage={90} color="gradient" />
-                <SkillBar skill="Continuous Learning" percentage={95} color="gradient" />
-                <SkillBar skill="Languages (English, French, Urdu)" percentage={85} color="gradient" />
-              </div>
-            </TabsContent>
-          </Tabs>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default SkillsSection; 
+export default SkillsSection;

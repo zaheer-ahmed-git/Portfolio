@@ -10,7 +10,7 @@ export const HeroSection = () => {
           <div className="flex flex-col justify-center space-y-6">
             <div className="inline-flex items-center rounded-full border border-[#444444] bg-black/80 px-5 py-1.5 text-sm w-fit ">
               <span className="flex h-2 w-2 rounded-full bg-[#00FFFF] animate-pulse mr-2"></span>
-              <span className="text-[#D8BFD8]">Available for new projects</span>
+              <span className="text-[#D8BFD8]">Looking for an internship · Available from February 2027</span>
             </div>
             <div className="space-y-4">
               <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-[#F5F5F5]">
@@ -59,7 +59,7 @@ export const HeroSection = () => {
                   <circle cx="4" cy="4" r="2"></circle>
                 </svg>
               </Link>
-              <Link href="https://github.com/NxtGen-Dev-ZAH" target="_blank" className="text-[#D8BFD8] hover:text-[#00FFFF] transition-colors">
+              <Link href="https://github.com/zaheer-ahmed-git" target="_blank" className="text-[#D8BFD8] hover:text-[#00FFFF] transition-colors">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -139,7 +139,7 @@ export const HeroSection = () => {
                   <p className="pl-4">],</p>
                   <p className="pl-4">
                     <span className="text-[#D8BFD8]">experience:</span>{" "}
-                    <span className="text-[#E6E6FA]">2</span>
+                    <span className="text-[#E6E6FA]">2+</span>
                   </p>
                   <p>&#125;;</p>
                 </div>
