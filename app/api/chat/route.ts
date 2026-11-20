@@ -10,6 +10,15 @@ import { createRetrievalChain } from 'langchain/chains/retrieval';
 import { createStuffDocumentsChain } from 'langchain/chains/combine_documents';
 import { LRUCache } from 'lru-cache';
 
+// The tokenizer lookup fails inside the Next bundle ("Unknown model") and only
+// feeds usage statistics, so use a simple character-based estimate instead.
+class PortfolioChatOpenAI extends ChatOpenAI {
+  async getNumTokens(content: unknown): Promise<number> {
+    const text = typeof content === 'string' ? content : JSON.stringify(content ?? '');
+    return Math.ceil(text.length / 4);
+  }
+}
+
 // Rate limiting implementation
 interface RateLimitInfo {
   count: number;
@@ -137,136 +146,95 @@ function checkRateLimit(ip: string): { limited: boolean; resetTime?: number; rea
 // Load CV data directly as a string
 const CV_DATA = `# Zaheer Ahmed
 
-**Agentic AI Developer & Cloud Generative AI Engineer**
-Islamabad, Pakistan
+**Agentic AI Developer & Generative AI Engineer**
+Calais, France
 Email: dev.zaheer.ahmad@gmail.com
 LinkedIn: linkedin.com/in/zaheerahmedabbasi
-GitHub: https://github.com/NxtGen-Dev-ZAH
-Instagram: https://www.instagram.com/zaheer_aahmedd/
-Facebook: https://www.facebook.com/zaheer.ahmadabbasi.77
+GitHub: https://github.com/zaheer-ahmed-git
+Website: https://zaheerai.pro/
 
 ## Profile
 
-Passionate and innovative Generative AI Engineer with over two years of experience in designing and deploying cloud-native AI solutions and scalable backend systems. Specializing in Large Language Models (LLMs), Retrieval-Augmented Generation (RAG) pipelines, and multimodal models like CLIP, I excel at building intelligent, automated systems integrated with modern APIs and microservices. My expertise in Azure Cloud, Docker, and FastAPI enables the delivery of high-performance AI platforms that enhance user engagement and operational efficiency. I am dedicated to pushing the boundaries of AI innovation while maintaining a focus on scalable, cloud-based architectures.
+Master 2 student in Complex Systems Engineering (EILCO / Université du Littoral Côte d'Opale, 2026-2027), with experience in explainable AI, RAG systems, multi-agent LLM applications, and cloud backend engineering. Completed a research and development internship at LISIC (Apr-Oct 2026) on explainable medication recommendation. Looking for a 6-month internship (stage) in France. Available for an internship from February 2027 (after 25 January 2027).
 
-## Core Skills
+## Availability
 
-- **Cloud Platforms**: Azure Cloud, Docker, CI/CD Pipelines, Dapr
-- **Generative AI**: LLMs, LangChain, LangGraph, CrewAI, Autogen, CLIP, OpenAI APIs, RAG Systems
-- **Backend Engineering**: FastAPI, Flask, Node.js, Kafka, Kong API Gateway
-- **Databases**: PostgreSQL, MySQL, NEON, VectorDBs
-- **Programming Languages**: Python, TypeScript, JavaScript, C++
-- **API Development**: REST, GraphQL, OpenAI APIs
-- **DevOps Tools**: GitHub, Azure DevOps
-- **Soft Skills**: Communication, Problem-Solving, Emotional Intelligence, Continuous Learning
-- **Languages**: English (Fluent), French (Intermediate) , Urdu (Native)
+- Zaheer is available for work from February 2027 (after 25 January 2027). He is looking for a 6-month internship (stage), in France first, including DevOps and cloud work (Docker, Azure, Azure DevOps CI/CD, Kafka, Kong).
+- Contact: dev.zaheer.ahmad@gmail.com
 
 ## Education
 
-- **Arid Agriculture University, Rawalpindi**
-  *Bachelor's Degree in Artificial Intelligence*
-  September 2022 – July 2026
-
-- **Presidential Initiative for AI & Computing (PIAIC), Islamabad**
-  *Certification in Artificial Intelligence & Computing*
-  June 2023 – May 2025
+- **Master 2 - Ingénierie des Systèmes Complexes (MISC / ISC)**, EILCO / Université du Littoral Côte d'Opale, Calais (2026-2027, in progress)
+- **Bachelor of Science in Computer Science**, PMAS Arid Agriculture University, Rawalpindi (2022-2026), CGPA 3.62/4.0
+- **Generative AI Development Course**, PIAIC (Jul 2023 - Jan 2026)
+- **Intermediate in Computer Science (ICS / HSSC)**, Board of Intermediate and Secondary Education, Rawalpindi (2020-2022), Bac-equivalent
 
 ## Certifications
 
-- Data Analysis with Python
-- Machine Learning with Python (with Honors)
-- Developing AI Applications with Python and Flask
-- Introduction to Deep Learning & Neural Networks with Keras
-- Python for Data Science, AI & Development
+- Machine Learning with Python (IBM, 2023)
+- Data Analysis with Python (IBM, 2023)
+- Developing AI Applications with Python and Flask (Coursera / IBM, 2024)
+- AWS Services for AI Solutions (Coursera / IBM, 2026)
+
+## Skills
+
+- **AI and Generative AI**: LangChain, LangGraph, OpenAI Agents SDK, CrewAI, RAG pipelines, Explainable AI, Agentic AI
+- **Machine Learning**: Python, PyTorch, TensorFlow, scikit-learn, XGBoost, FAISS, BM25
+- **Backend and Data**: FastAPI, Flask, Kafka, PostgreSQL, Kong API Gateway, Stripe
+- **Frontend**: Next.js, React, TypeScript, JavaScript
+- **Cloud and DevOps**: Azure, AWS, Docker, Git, CI/CD
+- **Languages**: English (Advanced), French (A2 CEFR)
 
 ## Professional Experience
 
-### DataSAZ Solutions, Islamabad
+### LISIC / Université du Littoral Côte d'Opale, Calais
+**Research and Development Intern** (Apr 2026 - Oct 2026)
+- Explainable AI for conversational medication recommendation.
+- Transformer and graph architectures, evaluated on the MIMIC-IV clinical benchmark.
 
-**AI Engineer**
-*October 2024 – Present*
-
-- Develop advanced AI solutions, including fine-tuned LLMs and agentic AI systems for enterprise use cases.
-- Implement scalable microservices with FastAPI, Kafka, and Kong API Gateway, deployed on Azure Cloud.
-- Design and deploy CI/CD pipelines using Docker and Azure DevOps for streamlined development workflows.
-
-### Fiverr
-
-**Freelance AI and ML Engineer**
-*September 2024 – Present*
-
-- Deliver tailored AI solutions, including custom chatbots, LLM fine-tuning, and agentic AI workflows for global clients.
-- Build scalable microservices with FastAPI, Next.js, and Kafka, integrated with cloud platforms like Azure.
-- Provide AI consulting services, focusing on automation and intelligent system design.
-
-### PIAIC, Islamabad
-
-**Generative AI Developer**
-*July 2023 – Present*
-
-- Designed and deployed AI-powered applications on Azure Cloud using Docker for seamless scaling.
-- Developed personalized AI chatbots and virtual assistants using LLMs and RAG pipelines to boost productivity.
-- Managed cloud-based microservices with FastAPI and Kong API Gateway for efficient backend operations.
+### Renograte LLC (Remote)
+**Platform and Architecture Engineer** (Dec 2025 - Apr 2026)
+- PropTech transaction SaaS and partner property ingestion.
+- AI valuation workflows and subscription capabilities.
 
 ### Thunderbird Technologies, Islamabad
+**Back-end Developer and Cloud System Architect** (Jul 2025 - Jan 2026)
+- FastAPI microservices and Kafka event streaming.
+- Kong API Gateway, Azure deployment, Docker and Azure DevOps CI/CD.
 
-**Software Developer**
-*July 2024 – September 2024*
+### DataSAZ Solutions (Remote)
+**Artificial Intelligence Engineer** (Jan 2025 - Jun 2025)
+- Conversational AI for cyber-physical systems using edge-device logs and operational event data.
 
-- Implemented Kafka-based event streaming systems integrated with AI microservices for real-time data processing.
-- Developed scalable, cloud-hosted APIs for e-commerce and notification services using Azure Cloud and Next.js.
-- Gained hands-on experience in frontend (Next.js) and backend (Node.js) development with Firebase deployment.
+### Renograte LLC (Remote)
+**AI Developer and Cloud Solutions** (Oct 2024 - Jun 2025)
+- Generative AI prototypes, data pipelines and cloud setup.
 
-## Key Projects
+### Thunderbird Technologies, Islamabad
+**Software Developer Intern** (Jul 2024 - Sep 2024)
+- Cloud-hosted e-commerce backend services, database schemas and notification REST APIs.
 
-### Autonomous Research Agent
+## Projects (public GitHub repositories)
 
-- Built an autonomous research agent using LangGraph, OpenAI APIs, and Next.js to independently gather, analyze, and synthesize information.
-- Implemented task decomposition, memory management, and recursive refinement for complex research tasks.
-
-### Multi-Agent Workflow Automation
-
-- Developed a cooperative AI agent system using CrewAI, FastAPI, and PostgreSQL to automate business workflows.
-- Designed a custom orchestration layer for task delegation, quality control, and inter-agent communication.
-
-### RAG-Powered Knowledge Base
-
-- Created an intelligent document processing system using LlamaIndex, Faiss, LangChain, and Next.js.
-- Features hybrid search, contextual recommendations, and automated knowledge graph construction from unstructured documents.
-
-### AI Agent Marketplace
-
-- Engineered a platform for creating and deploying custom AI agents using React, FastAPI, and LangGraph.
-- Included agent configuration tools, performance monitoring, and automated testing frameworks.
-
-### Cloud AI Assistant
-
-- Developed an AI assistant using Next.js, FastAPI, and OpenAI APIs, deployed on Azure Cloud.
-- Enabled seamless user interaction through scalable cloud infrastructure and modern API integrations.
-
-### E-commerce Backend API
-
-- Built cloud-hosted microservices with Kafka and FastAPI to manage orders, payments, and notifications for an e-commerce platform.
-- Ensured high availability and scalability through Azure Cloud deployment.
-
-## Publications
-
-- **From Code to Cloud: My Journey in AI, Web Development, and Beyond**
-  A detailed exploration of my experiences in AI, cloud engineering, and scalable system design.
+- **Autonomous Research Agent** (LangGraph, FastAPI, Next.js): multi-agent research assistant producing citation-grounded reports. https://github.com/zaheer-ahmed-git/ResearchMind-Autonomous-Multi-Agent-Research-Assistant
+- **Multi-Agent Workflow Automation** (OpenAI Agents SDK, FastAPI, PostgreSQL): orchestration layer with a quality-control reviewer gate and persistent memory. https://github.com/zaheer-ahmed-git/LLM-Travel-Argumentation-Agent
+- **RAG-Powered Knowledge Base** (LlamaIndex, FAISS, BM25, LangChain): hybrid retrieval with RRF and MMR, knowledge-graph context. https://github.com/zaheer-ahmed-git/RAG-Powered-Knowledge-Base
+- **Real-time Call Semantic Analysis** (wav2vec2, FastAPI, Next.js): audio emotion and text sentiment to estimate sale probability. https://github.com/zaheer-ahmed-git/RealtimeCallSemanticAnalysis
+- **Vehicle Re-Identification** (final-year project, FastAPI, Next.js): vehicle re-identification from video. https://github.com/zaheer-ahmed-git/VehicleReIdentification
+- **Public Housing Maintenance ML** (XGBoost, Streamlit): maintenance cost estimation and high-cost prioritisation. https://github.com/zaheer-ahmed-git/Public_Housing_Maintenance_ML
+- **E-commerce Backend API** (FastAPI, Kafka, Stripe, Kong, Docker Compose): microservices backend. https://github.com/zaheer-ahmed-git/Zaheer_Mart_Api
+- **French Listening Exercises** (Azure Speech, MongoDB Atlas): agent-driven French listening lessons for B1-B2 learners. https://github.com/zaheer-ahmed-git/FrenchExercise-KnowledgeBuilding
+- **Weather Prediction System** (Flask, ML): CSV-based weather pattern prediction. https://github.com/zaheer-ahmed-git/Weather_Prediction_System_Using_Flask
 
 ## Interests
 
-- Staying at the forefront of agentic AI, generative AI, and scalable cloud technologies.
-- Exploring emerging trends in multi-agent systems, automation, and intelligent workflows.
-- Contributing to open-source AI projects and collaborating on innovative tech solutions.
+- Explainable and contestable LLM systems, structured-evidence RAG, conversational recommendation, sequence and graph ranking fusion, evaluation of LLM-generated explanations.
 
 ## Contact
 
-Let's connect to bring innovative AI-powered solutions to life!
-
 - **Email**: dev.zaheer.ahmad@gmail.com
 - **LinkedIn**: linkedin.com/in/zaheerahmedabbasi
-- **GitHub**: github.com/zaheerahmad`;
+- **GitHub**: github.com/zaheer-ahmed-git`;
 
 // Initialize the vector store and retriever - this happens once when the API route is first loaded
 let vectorStore: MemoryVectorStore;
@@ -441,9 +409,9 @@ export async function POST(req: NextRequest) {
         let fullResponse = '';
         
         // Create the model with optimized settings
-        const model = new ChatOpenAI({
-          modelName: "gpt-3.5-turbo", // Use standard model to avoid compatibility issues
-          temperature: 0.2, // Lower temperature for more deterministic responses
+        const model = new PortfolioChatOpenAI({
+          modelName: "gpt-6-luna", // gpt-3.5-turbo is deprecated and returns 404 model_not_found
+           // Lower temperature for more deterministic responses
           streaming: true,
           callbacks: [
             {

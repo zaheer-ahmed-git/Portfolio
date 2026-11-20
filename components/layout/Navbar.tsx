@@ -1,17 +1,13 @@
 'use client';
 
 import Link from "next/link";
-import { CircuitBoard, Download } from "lucide-react";
+import { CircuitBoard, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
   const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/zaheer_cv.pdf';
-    link.download = 'zaheer_cv.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Open the PDF in a new tab instead of forcing a download.
+    window.open('/zaheer_cv.pdf', '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -75,7 +71,7 @@ export const Navbar = () => {
             className="border-[#444444] text-[#F5F5F5] hover:bg-[#30193D]/30 hover:border-[#00FFFF] transition-colors bg-black/80 hover:text-[#00FFFF]"
             onClick={handleDownload}
           >
-            <Download className="mr-2 h-4 w-4" />
+            <FileText className="mr-2 h-4 w-4" />
             Resume
           </Button>
           <Button

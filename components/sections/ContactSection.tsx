@@ -27,12 +27,8 @@ export const ContactSection = () => {
   });
 
   const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/zaheer_cv.pdf';
-    link.download = 'zaheer_cv.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Open the PDF in a new tab (the viewer still offers a download button).
+    window.open('/zaheer_cv.pdf', '_blank', 'noopener,noreferrer');
   };
 
   const handleEmail = () => {
@@ -102,7 +98,7 @@ export const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-sm text-[#D8BFD8]">Location</p>
-                  <p className="font-medium text-[#F5F5F5]">Islamabad, Pakistan</p>
+                  <p className="font-medium text-[#F5F5F5]">Calais, France</p>
                 </div>
               </div>
             </div>
@@ -116,7 +112,7 @@ export const ContactSection = () => {
                 className="border-[#444444] text-[#F5F5F5] hover:bg-[#30193D]/30 hover:border-[#00FFFF] transition-colors bg-black/80 hover:text-[#00FFFF]"
                 onClick={handleDownload}
               >
-                Download Resume
+                View Resume
               </Button> 
             </div>
           </div>

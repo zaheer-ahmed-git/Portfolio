@@ -11,6 +11,7 @@ import {
   Bot,
   Clock,
   MessageCircle,
+  Linkedin,
 } from "lucide-react";
 
 // Define message type
@@ -403,10 +404,10 @@ export default function ProfessionalChatbot() {
         <div className="bg-[#222222] p-4 rounded-lg border border-[#444444] flex items-center space-x-4">
           <Phone size={24} className="text-[#00FFFF]" />
           <div>
-            <h4 className="font-semibold text-[#F5F5F5]">Whatsapp Support</h4>
-            <p className="text-sm text-[#D8BFD8]">+92 347 5177267</p>
+            <h4 className="font-semibold text-[#F5F5F5]">Phone Support</h4>
+            <p className="text-sm text-[#D8BFD8]">+33 6 36 04 75 67</p>
             <p className="text-xs text-[#D8BFD8]/70">
-              Monday - Friday, 9am - 4pm EST
+              Monday - Friday, 09:00 - 16:00 EST
             </p>
           </div>
         </div>
@@ -425,10 +426,24 @@ export default function ProfessionalChatbot() {
           <div>
             <h4 className="font-semibold text-[#F5F5F5]">Business Hours</h4>
             <p className="text-sm text-[#D8BFD8]">
-              Monday - Friday: 9am - 5pm EST
+              Monday - Friday: 09:00 - 17:00 EST
             </p>
-            <p className="text-sm text-[#D8BFD8]">Saturday: 11am - 3pm EST</p>
+            <p className="text-sm text-[#D8BFD8]">Saturday: 11:00 - 15:00 EST</p>
             <p className="text-sm text-[#D8BFD8]">Sunday: Closed</p>
+          </div>
+        </div>
+        <div className="bg-[#222222] p-4 rounded-lg border border-[#444444] flex items-center space-x-4">
+          <Linkedin size={24} className="text-[#00FFFF]" />
+          <div>
+            <h4 className="font-semibold text-[#F5F5F5]">LinkedIn</h4>
+            <a
+              href="https://linkedin.com/in/zaheerahmedabbasi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-[#D8BFD8] hover:text-[#00FFFF]"
+            >
+              linkedin.com/in/zaheerahmedabbasi
+            </a>
           </div>
         </div>
       </div>
